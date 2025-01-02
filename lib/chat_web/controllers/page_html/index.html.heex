@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat Box</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+      margin-top: 20px;
+    }
+
+    #chat-box {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      width: 60%;
+      margin: 20px auto;
+      padding: 20px;
+      height: 300px;
+      overflow-y: scroll;
+    }
+
+    #chat-box p {
+      font-size: 14px;
+      margin: 10px 0;
+    }
+
+    #chat-box b {
+      color: #007bff;
+    }
+
+    #chat-form {
+      width: 60%;
+      margin: 20px auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    #chat-form div {
+      margin-bottom: 15px;
+    }
+
+    #chat-form label {
+      display: block;
+      font-weight: bold;
+      color: #333;
+    }
+
+    #chat-form input, #chat-form textarea {
+      width: 100%;
+      padding: 10px;
+      font-size: 14px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    #chat-form textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    #chat-form button {
+      padding: 10px 15px;
+      font-size: 16px;
+      color: #fff;
+      background-color: #007bff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    #chat-form button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Chat Box</h2>
+  <div id="chat-box">
+    <%= for message <- @messages do %>
+      <p><b><%= message.name %>:</b> <%= message.body %></p>
+    <% end %>
+  </div>
+
+  <form id="chat-form" action="/submit_message" method="POST">
+    <div>
+      <label for="user-name">Username:</label>
+      <input type="text" id="user-name" name="username" placeholder="Enter your username" required>
+    </div>
+    
+    <div>
+      <label for="user-msg">Your message:</label>
+      <textarea id="user-msg" name="message" placeholder="Type your message..." required></textarea>
+    </div>
+    
+    <div>
+      <button type="submit">Post</button>
+    </div>
+  </form>
+   <script>
+    // Clear chat history on page load
+    window.onload = function() {
+      document.getElementById('chat-box').innerHTML = '';
+    };
+  </script>
+
+
+</body>
+</html>
